@@ -14,6 +14,6 @@ public interface Contratable {
     
     public double getTarifa();  
     
-   
+    public String getTipo();
    
 }

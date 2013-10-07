@@ -8,23 +8,29 @@ import  Interface.Contratable;
 
 /**
  *
- * @author nilver
+ * @author karla
  */
-public class BuzDMens extends ServiciosAdicionales{
+public class Moc200 extends ServiciosAdicionales {
     
-    public  BuzDMens (Contratable cont){
+    public  Moc200 (Contratable cont){
     
         super(cont);
     }    
         
+    @Override
     public String getNombre(){
     
-        return getCont().getNombre() +"BuzDMens";
+        return getCont().getNombre() +"Paquete Mocel 200";
     }
     
+    @Override
     public double getTarifa(){
     
-        return getCont().getTarifa() + 1500;
+        return getCont().getTarifa() + 49;
     }
     
+     @Override
+     public String getTipo(){
+        return "Prepago";
+     }
 }

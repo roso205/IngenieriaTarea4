@@ -6,24 +6,33 @@ package ObjetosBase;
 import  Interface.ServiciosAdicionales;
 import  Interface.Contratable;
 
+
 /**
  *
- * @author karla
+ * @author nilver
  */
-public class SegMoMcl extends ServiciosAdicionales {
+public class PegOtr30 extends ServiciosAdicionales{
     
-    public  SegMoMcl (Contratable cont){
+    public  PegOtr30 (Contratable cont){
     
         super(cont);
     }    
         
+     @Override
     public String getNombre(){
     
-        return getCont().getNombre() +"Segundos a la misma operadora";
+        return getCont().getNombre() +"Paquete pegadito con otros 30";
     }
     
+    @Override
     public double getTarifa(){
     
-        return getCont().getTarifa() + 1500;
+        return getCont().getTarifa() + 19;
     }
+    
+    @Override
+    public String getTipo(){
+       return "Prepago";
+    }
+    
 }

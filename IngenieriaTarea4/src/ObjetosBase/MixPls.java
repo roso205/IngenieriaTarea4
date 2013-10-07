@@ -5,27 +5,32 @@
 package ObjetosBase;
 import  Interface.ServiciosAdicionales;
 import  Interface.Contratable;
-
-
 /**
  *
- * @author nilver
+ * @author roso
  */
-public class TextMsj extends ServiciosAdicionales{
+public class MixPls extends ServiciosAdicionales{
     
-    public  TextMsj (Contratable cont){
+    public  MixPls (Contratable cont){
     
         super(cont);
     }    
         
+    @Override
     public String getNombre(){
     
-        return getCont().getNombre() +"TextMsj";
+        return getCont().getNombre() +"Paquete mixto plus";
     }
     
+    @Override
     public double getTarifa(){
     
-        return getCont().getTarifa() + 1500;
+        return getCont().getTarifa() + 211;
     }
+    
+    @Override
+     public String getTipo(){
+        return "Postpago";
+     }
     
 }

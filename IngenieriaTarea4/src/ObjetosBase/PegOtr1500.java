@@ -8,22 +8,30 @@ import  Interface.Contratable;
 
 /**
  *
- * @author karla
+ * @author nilver
  */
-public class SegOtr extends ServiciosAdicionales {
+public class PegOtr1500 extends ServiciosAdicionales{
     
-    public  SegOtr (Contratable cont){
+    public  PegOtr1500 (Contratable cont){
     
         super(cont);
     }    
         
+     @Override
     public String getNombre(){
     
-        return getCont().getNombre() +"Segundos a otras operadoras";
+        return getCont().getNombre() +"Paquete pegadito con otros 1500";
     }
     
+    @Override
     public double getTarifa(){
     
-        return getCont().getTarifa() + 1500;
+        return getCont().getTarifa() + 16;
     }
+    
+    @Override
+    public String getTipo(){
+       return "Postpago";
+    }
+    
 }
