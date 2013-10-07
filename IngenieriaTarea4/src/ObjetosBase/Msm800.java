@@ -20,7 +20,7 @@ public class Msm800 extends ServiciosAdicionales {
     @Override
     public String getNombre(){
     
-        return getCont().getNombre() +"Paquete de mensajes 800";
+        return getCont().getNombre() +" junto con el paquete de mensajes 800";
     }
     
     @Override

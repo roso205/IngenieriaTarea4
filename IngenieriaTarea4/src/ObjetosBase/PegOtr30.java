@@ -21,7 +21,7 @@ public class PegOtr30 extends ServiciosAdicionales{
      @Override
     public String getNombre(){
     
-        return getCont().getNombre() +"Paquete pegadito con otros 30";
+        return getCont().getNombre() +" junto con el paquete pegadito con otros 30";
     }
     
     @Override

@@ -20,7 +20,7 @@ public class Moc200 extends ServiciosAdicionales {
     @Override
     public String getNombre(){
     
-        return getCont().getNombre() +"Paquete Mocel 200";
+        return getCont().getNombre() +" junto con el paquete Mocel 200";
     }
     
     @Override

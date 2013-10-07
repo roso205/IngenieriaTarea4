@@ -19,7 +19,7 @@ public class MixPls extends ServiciosAdicionales{
     @Override
     public String getNombre(){
     
-        return getCont().getNombre() +"Paquete mixto plus";
+        return getCont().getNombre() +"junto con el paquete mixto plus";
     }
     
     @Override

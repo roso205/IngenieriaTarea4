@@ -21,20 +21,13 @@ public class Main {
     
     public static void main(String[] args) {
         
+        Contratable plan = new MIXTOPLUS();
         
-       //PlanPostpago Puta = new PlanPostpago(5,"hola","chao",9);
         
-     //  Puta.ImprimirFactura(74223);
-
-         // PlanPrepago Puta2 = new PlanPrepago(5,"hola","chao",9);
+        ControlarorServiciosContratables cnt = new ControlarorServiciosContratables();
+            cnt.VerPlanes();
+            cnt.VerPaquetes(plan);
         
-     // Puta2.ImprimirFactura(74223);         
-        
-         ControladorFacturas Factura = new ControladorFacturas();
-        
-        Factura.ImprimirFactura(74223);
-         
-      
     }
         
 }

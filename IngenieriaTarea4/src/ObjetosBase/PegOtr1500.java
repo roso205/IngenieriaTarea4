@@ -20,7 +20,7 @@ public class PegOtr1500 extends ServiciosAdicionales{
      @Override
     public String getNombre(){
     
-        return getCont().getNombre() +"Paquete pegadito con otros 1500";
+        return getCont().getNombre() +"junto con el paquete pegadito con otros 1500";
     }
     
     @Override
