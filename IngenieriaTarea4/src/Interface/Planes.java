@@ -24,7 +24,7 @@ public abstract class Planes implements Contratable {
        return true;
    }
    
-    @Override
+    
    public String getTipo(){
        return this.tipo;
    }
