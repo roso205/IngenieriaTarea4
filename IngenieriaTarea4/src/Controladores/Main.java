@@ -4,14 +4,12 @@
  */
 package Controladores;
 
-import Controladores.ControladorConsumidores;
-import Controladores.ControladorConsumos;
-import Controladores.ControladorFacturas;
-import Controladores.Afiliaciones;
-import Controladores.ControladorServiciosOfrecidos;
+import Controladores.*;
 import javax.swing.JOptionPane;
 import java.util.*;
 import java.text.*;
+import ObjetosBase.*;
+import Interface.*;
 
 
 /**
@@ -23,14 +21,20 @@ public class Main {
     
     public static void main(String[] args) {
         
-                
         
-        ControladorFacturas Factura = new ControladorFacturas();
+       //PlanPostpago Puta = new PlanPostpago(5,"hola","chao",9);
+        
+     //  Puta.ImprimirFactura(74223);
+
+         // PlanPrepago Puta2 = new PlanPrepago(5,"hola","chao",9);
+        
+     // Puta2.ImprimirFactura(74223);         
+        
+         ControladorFacturas Factura = new ControladorFacturas();
         
         Factura.ImprimirFactura(74223);
          
-         
+      
     }
-
         
 }

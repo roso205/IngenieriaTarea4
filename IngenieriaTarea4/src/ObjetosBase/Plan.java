@@ -1,5 +1,8 @@
 package ObjetosBase;
 
+
+import Interface.Factura;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -11,13 +14,19 @@ package ObjetosBase;
  */
 public class Plan {
     
+    protected Factura TipoFactura;
     private int codigo;
     private String tipo;
     private double tarifa;
     private String nombre;
     
+public void ImprimirFactura(Producto Producto,Cliente Cliente,Plan Plan) {
+    
+    TipoFactura.ImprimirFactura(Producto,Cliente,Plan);
+}
 
-public Plan(int cod, String nombre, String tip, double tarifa ){
+
+public Plan(int cod, String nombre, String tip, double tarifa) {
 
     this.codigo = cod;
     this.tipo = tip;
