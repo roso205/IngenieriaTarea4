@@ -5,26 +5,25 @@
 package ObjetosBase;
 import  Interface.ServiciosAdicionales;
 import  Interface.Contratable;
+
 /**
  *
- * @author roso
+ * @author karla
  */
-public class SegFijoMocOtr extends ServiciosAdicionales{
+public class SegMoMcl extends ServiciosAdicionales {
     
-    public  SegFijoMocOtr (Contratable cont){
+    public  SegMoMcl (Contratable cont){
     
         super(cont);
     }    
         
     public String getNombre(){
     
-        return getCont().getNombre() +"SegFijoMocOtr";
+        return getCont().getNombre() +"Segundos a la misma operadora";
     }
     
     public double getTarifa(){
     
         return getCont().getTarifa() + 1500;
     }
-    
-    
 }
