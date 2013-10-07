@@ -9,7 +9,7 @@ import  Interface.Contratable;
  *
  * @author roso
  */
-public class SegFijoMocOtr {
+public class SegFijoMocOtr extends ServiciosAdicionales{
     
     public  SegFijoMocOtr (Contratable cont){
     
