@@ -44,7 +44,7 @@ public class Afiliaciones {
         ResultSet rs = stmt.executeQuery(consulta);
 
         List<String> resultado = new ArrayList<String>();
-
+        Afiliaciones tipo = new Afiliaciones();
 
         while (rs.next()){
 
@@ -54,9 +54,10 @@ public class Afiliaciones {
 
             }
         }
-/////////////////////////////////////////////////////////////////////
+
         Plan Plan = new Plan(Integer.parseInt(resultado.get(0)),
-                resultado.get(1),"hola",Double.parseDouble(resultado.get(2)));
+                resultado.get(1),tipo.buscarTipoPlan(Codigo),
+                                      Double.parseDouble(resultado.get(2)));
        
         
         
@@ -420,5 +421,39 @@ public class Afiliaciones {
         } 
     
     }
+   
     
+    public String buscarTipoPlan(int CodigoPlan){
+        
+          try{
+
+        String resultado = "POSTPAGO";
+        gestionarBaseDatos BaseDatos = new gestionarBaseDatos();
+        
+        Connection connection = BaseDatos.establecerConexion();
+                
+        Statement stmt = connection.createStatement();
+        String consulta = "SELECT * FROM PREPAGO "
+             + " WHERE (PREPAGO.CODIGO_P = " +Integer.toString(CodigoPlan)+") ";
+
+                    
+        ResultSet rs = stmt.executeQuery(consulta);
+
+
+        if (rs.next()){
+            resultado = "PREPAGO";
+        }
+
+
+        BaseDatos.cerrarConexion(connection); 
+        return resultado;
+        }
+
+        catch ( Exception e ) {
+            System.out.println(e.getMessage());
+            String resultado = "";
+            return resultado;
+        } 
+        
+    }
 }
