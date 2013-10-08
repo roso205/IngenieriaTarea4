@@ -10,20 +10,28 @@ import  Interface.Contratable;
  *
  * @author karla
  */
-public class SegOtr extends ServiciosAdicionales {
+public class Msm800 extends ServiciosAdicionales {
     
-    public  SegOtr (Contratable cont){
+    public  Msm800 (Contratable cont){
     
         super(cont);
     }    
         
+    @Override
     public String getNombre(){
     
-        return getCont().getNombre() +"Segundos a otras operadoras";
+        return getCont().getNombre() +" junto con el paquete de mensajes 800";
     }
     
+    @Override
     public double getTarifa(){
     
-        return getCont().getTarifa() + 1500;
+        return getCont().getTarifa() + 38;
     }
+    
+    @Override
+    public String getTipo(){
+       return "Mixto";
+    }
+    
 }

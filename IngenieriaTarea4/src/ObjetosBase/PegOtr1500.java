@@ -10,21 +10,28 @@ import  Interface.Contratable;
  *
  * @author nilver
  */
-public class BuzDMens extends ServiciosAdicionales{
+public class PegOtr1500 extends ServiciosAdicionales{
     
-    public  BuzDMens (Contratable cont){
+    public  PegOtr1500 (Contratable cont){
     
         super(cont);
     }    
         
+     @Override
     public String getNombre(){
     
-        return getCont().getNombre() +"BuzDMens";
+        return getCont().getNombre() +"junto con el paquete pegadito con otros 1500";
     }
     
+    @Override
     public double getTarifa(){
     
-        return getCont().getTarifa() + 1500;
+        return getCont().getTarifa() + 16;
+    }
+    
+    @Override
+    public String getTipo(){
+       return "Postpago";
     }
     
 }

@@ -10,20 +10,27 @@ import  Interface.Contratable;
  *
  * @author karla
  */
-public class SegMoMcl extends ServiciosAdicionales {
+public class Moc200 extends ServiciosAdicionales {
     
-    public  SegMoMcl (Contratable cont){
+    public  Moc200 (Contratable cont){
     
         super(cont);
     }    
         
+    @Override
     public String getNombre(){
     
-        return getCont().getNombre() +"Segundos a la misma operadora";
+        return getCont().getNombre() +" junto con el paquete Mocel 200";
     }
     
+    @Override
     public double getTarifa(){
     
-        return getCont().getTarifa() + 1500;
+        return getCont().getTarifa() + 49;
     }
+    
+     @Override
+     public String getTipo(){
+        return "Prepago";
+     }
 }

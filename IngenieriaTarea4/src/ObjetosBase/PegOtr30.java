@@ -11,21 +11,28 @@ import  Interface.Contratable;
  *
  * @author nilver
  */
-public class TextMsj extends ServiciosAdicionales{
+public class PegOtr30 extends ServiciosAdicionales{
     
-    public  TextMsj (Contratable cont){
+    public  PegOtr30 (Contratable cont){
     
         super(cont);
     }    
         
+     @Override
     public String getNombre(){
     
-        return getCont().getNombre() +"TextMsj";
+        return getCont().getNombre() +" junto con el paquete pegadito con otros 30";
     }
     
+    @Override
     public double getTarifa(){
     
-        return getCont().getTarifa() + 1500;
+        return getCont().getTarifa() + 19;
+    }
+    
+    @Override
+    public String getTipo(){
+       return "Prepago";
     }
     
 }

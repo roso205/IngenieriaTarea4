@@ -9,22 +9,28 @@ import  Interface.Contratable;
  *
  * @author roso
  */
-public class SegFijoMocOtr extends ServiciosAdicionales{
+public class MixPls extends ServiciosAdicionales{
     
-    public  SegFijoMocOtr (Contratable cont){
+    public  MixPls (Contratable cont){
     
         super(cont);
     }    
         
+    @Override
     public String getNombre(){
     
-        return getCont().getNombre() +"SegFijoMocOtr";
+        return getCont().getNombre() +"junto con el paquete mixto plus";
     }
     
+    @Override
     public double getTarifa(){
     
-        return getCont().getTarifa() + 1500;
+        return getCont().getTarifa() + 211;
     }
     
+    @Override
+     public String getTipo(){
+        return "Postpago";
+     }
     
 }
