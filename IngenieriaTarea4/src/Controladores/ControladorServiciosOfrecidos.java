@@ -7,6 +7,7 @@ package Controladores;
 import BaseDatos.Conexion;
 import BaseDatos.gestionarBaseDatos;
 import ObjetosBase.Paquete;
+import ObjetosBase.Plan;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -20,6 +21,41 @@ import java.util.List;
 public class ControladorServiciosOfrecidos {
     
     public ControladorServiciosOfrecidos() {
+        
+    }
+    
+    public boolean agregarPlan(Plan p) {
+        
+        int codigoP = p.getCodigo();
+        double tarifaP = p.getTarifa();
+        String nombreP = p.getNombre();
+        String tipoP = p.getTipo();
+        
+        gestionarBaseDatos gestorBD = new gestionarBaseDatos();
+        
+        Connection conexion = gestorBD.establecerConexion();
+        
+        String insertPlan = "INSERT INTO PLAN VALUES (" +
+                                Integer.toString(codigoP)+ ", '"+
+                                nombreP + "', " +
+                                Double.toString(tarifaP)+ ");";
+               
+        try {
+        
+            Statement stmt = conexion.createStatement();
+            int resultado = stmt.executeUpdate(insertPlan);
+            stmt.close();
+            gestorBD.cerrarConexion(conexion);
+            return resultado > 0;
+            
+
+        
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
+        gestorBD.cerrarConexion(conexion);
+        return false;
         
     }
     
