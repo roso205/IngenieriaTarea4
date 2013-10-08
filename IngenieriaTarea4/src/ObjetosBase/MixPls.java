@@ -30,7 +30,7 @@ public class MixPls extends ServiciosAdicionales{
     
     @Override
      public String getTipo(){
-        return "Postpago";
+        return "UNICO";
      }
     
 }

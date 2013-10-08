@@ -31,7 +31,9 @@ public class Msm800 extends ServiciosAdicionales {
     
     @Override
     public String getTipo(){
-       return "Mixto";
+       return "UNICO";
     }
+    
+      
     
 }

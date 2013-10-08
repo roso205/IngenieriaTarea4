@@ -31,7 +31,8 @@ public class PegOtr1500 extends ServiciosAdicionales{
     
     @Override
     public String getTipo(){
-       return "Postpago";
+       return "MENSUAL";
     }
     
+   
 }

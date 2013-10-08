@@ -32,7 +32,8 @@ public class PegOtr30 extends ServiciosAdicionales{
     
     @Override
     public String getTipo(){
-       return "Prepago";
+       return "MENSUAL";
     }
     
+
 }
