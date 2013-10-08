@@ -30,10 +30,20 @@ public class Main {
         
      // Puta2.ImprimirFactura(74223);         
         
-         ControladorFacturas Factura = new ControladorFacturas();
+      // ControladorFacturas Factura = new ControladorFacturas();
         
-        Factura.ImprimirFactura(74223);
-         
+       //Factura.ImprimirFactura(74223);
+        
+        //Afiliaciones hola = new Afiliaciones();
+        
+       // hola.modificarPlan(77854, 27564);
+         Date kk = new Date();
+
+          
+          
+         ControladorConsumos juju = new ControladorConsumos();
+
+        juju.agregarConsumo(5, 1014, kk , 77854);
       
     }
         

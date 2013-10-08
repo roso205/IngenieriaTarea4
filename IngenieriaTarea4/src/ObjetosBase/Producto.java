@@ -4,6 +4,7 @@
  */
 package ObjetosBase;
 
+import java.util.Date;
 /**
  *
  * @author yue
@@ -15,18 +16,18 @@ public class Producto {
     private String Descripcion;
     private int CodigoPlan;
     private int RifCliente;
-    private String FechaAfiliacion;
+    private Date FechaAfiliacion;
     private int Saldo;
    
     //Constructor
-    public Producto(int Codigo, String Nombre, String Descripcion, 
-            int CodigoPlan, int RifCliente, String FechaAfiliacion, int Saldo){
+    public Producto(int Codigo, String Nombre, String Descripcion,
+            int CodigoPlan, int RifCliente, Date FechaAfiliacion, int Saldo) {
         
         this.Codigo = Codigo;
         this.Nombre = Nombre;
         this.Descripcion= Descripcion;
         this.CodigoPlan = CodigoPlan;
-        this.RifCliente = RifCliente;;
+        this.RifCliente = RifCliente;
         this.FechaAfiliacion = FechaAfiliacion;
         this.Saldo = Saldo;
         
@@ -96,13 +97,13 @@ public class Producto {
     }  
  
     
-    public void setFechaAfiliacion(String FechaAfiliacion) {
+    public void setFechaAfiliacion(Date FechaAfiliacion) {
         
         this.FechaAfiliacion = FechaAfiliacion;
                    
     }
 
-    public String getFechaAfiliacion() {
+    public Date getFechaAfiliacion() {
        
         return this.FechaAfiliacion;
               

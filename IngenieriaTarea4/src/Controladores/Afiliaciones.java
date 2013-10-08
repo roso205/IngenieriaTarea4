@@ -1,7 +1,7 @@
 package Controladores;
 
-import BaseDatos.gestionarBaseDatos;
-import ObjetosBase.Plan;
+import BaseDatos.*;
+import ObjetosBase.*;
 import java.sql.*;
 import java.util.List;
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import ObjetosBase.Producto;
+
 
 /*
  * To change this template, choose Tools | Templates
@@ -128,10 +128,47 @@ public class Afiliaciones {
         Date date = new Date();
         String fecha_a = (dateFormat.format(date)).toString();
         
-        String afiliacion = "UPDATE PRODUCTO SET CODIGO_P = "+
-                            Integer.toString(codigoPlan) + ", FECHA_A = '"+
-                            fecha_a + "' WHERE CODIGO = " +
-                            Integer.toString(codigoProducto) +";";
+        ControladorConsumidores Consulta = new ControladorConsumidores();
+        Producto Producto = Consulta.buscarProducto(codigoProducto);
+        
+        Afiliaciones Consulta2 = new Afiliaciones();
+        
+        String TipoPlanProducto =
+                            Consulta2.buscarTipoPlan(Producto.getCodigoPlan());
+        String TipoPlan = Consulta2.buscarTipoPlan(codigoPlan);
+        
+        if (!TipoPlanProducto.equalsIgnoreCase(TipoPlan)) {
+            System.out.println("No se puede afiliar un plan "+TipoPlan+
+                                            " a un Producto "+TipoPlanProducto);
+          return false;  
+        }
+        
+        String afiliacion;
+        
+        if (TipoPlanProducto.equalsIgnoreCase("POSTPAGO")) {
+            afiliacion = "UPDATE PRODUCTO SET CODIGO_P = "+
+                                Integer.toString(codigoPlan) + ", FECHA_A = '"+
+                                fecha_a + "' WHERE CODIGO = " +
+                                Integer.toString(codigoProducto) +";";
+        
+        } else {
+
+              
+            Plan Plan = Consulta2.buscarPlan(codigoPlan);   
+            
+            if ((Producto.getSaldo()-Plan.getTarifa()) >= 0 ) {
+                afiliacion = "UPDATE PRODUCTO SET CODIGO_P = "+
+                                Integer.toString(codigoPlan) + ", FECHA_A = '"+
+                                fecha_a + "' SALDO = "+
+                                (Producto.getSaldo()-Plan.getTarifa())+
+                                " WHERE CODIGO = " +
+                                Integer.toString(codigoProducto) +";"; 
+            } else {
+                System.out.println("Saldo Insuficiente para adquirir el plan");
+                return false;     
+            }
+        }
+        
         
         try {
             

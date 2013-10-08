@@ -5,10 +5,13 @@ package Controladores;
  * and open the template in the editor.
  */
 import BaseDatos.Conexion;
-import ObjetosBase.Consumo;
+import ObjetosBase.*;
+import Interface.*;
 import java.util.Date;
 import java.sql.*;
-import java.util.ArrayList;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 /**
  *
  * @author nilver
@@ -59,8 +62,125 @@ public class ControladorConsumos{
             System.out.println(e.getMessage());
         }
             
-        String agregar = "INSERT INTO CONSUMO (CODIGO_S,CODIGO_PR,FECHA,CANTIDAD)"
-                + "VALUES ("+Integer.toString(codServicio)+","+Integer.toString(codProducto)+",now(),"+cantidad+")";
+        
+        
+        ControladorConsumidores Consulta = new ControladorConsumidores();
+        Producto Producto = Consulta.buscarProducto(codProducto);
+        
+        Afiliaciones Consulta2 = new Afiliaciones();   
+        String TipoPlanProducto =
+                            Consulta2.buscarTipoPlan(Producto.getCodigoPlan());
+
+        String agregar;
+        
+        if (TipoPlanProducto.equalsIgnoreCase("POSTPAGO")) {
+            
+
+            agregar = "INSERT INTO CONSUMO (CODIGO_S,CODIGO_PR,FECHA,CANTIDAD)"
+                    + "VALUES ("+Integer.toString(codServicio)+","
+                    +Integer.toString(codProducto)+","+fecha+","
+                                                                 +cantidad+")";
+          
+        } else {
+            System.out.println("");
+                  
+            
+     
+            ControladorConsumos Consulta3 = new ControladorConsumos();
+            ArrayList<Consumo> Consumos=Consulta3.consultarConsumo(codProducto);
+            Plan Plan =  Consulta2.buscarPlan(Producto.getCodigoPlan());
+            ControladorServiciosOfrecidos Consulta4 =
+                                            new ControladorServiciosOfrecidos();
+            
+            ArrayList<String> ServiciosPlan = new ArrayList<String>();
+            ArrayList<Servicio> ServiciosPlanTotal = new ArrayList<Servicio>();
+          
+            List<String> Paquetes = Consulta2.BuscarPaquete(Plan.getCodigo());
+                     
+            for (int i = 0; i < Paquetes.size(); i++) {
+
+                ServiciosPlan = Consulta4.obtenerServicios(
+                                            Integer.parseInt(Paquetes.get(i)));
+
+                for (int j = 0; j < ServiciosPlan.size(); j++) {
+
+                 ServiciosPlanTotal.add(Consulta4.buscarServicioPaquete(
+                            Integer.parseInt(ServiciosPlan.get(j)), 
+                            Integer.parseInt(Paquetes.get(i))));
+                 
+
+
+                }
+            }
+            
+   
+            int segMOCEL = 0;
+            int segOtras = 0;
+            int msj = 0;
+           
+            //Creamos las variables con las cantidades de los servicios
+            //que obtienen del plan
+            for (int i = 0; i < ServiciosPlanTotal.size(); i++) {
+
+               if (ServiciosPlanTotal.get(i).getCodigo() == 1014 ){
+                    segMOCEL += ServiciosPlanTotal.get(i).getCantidad();
+               } else if (ServiciosPlanTotal.get(i).getCodigo() == 1054 ){
+                    segOtras += ServiciosPlanTotal.get(i).getCantidad();
+               } else if (ServiciosPlanTotal.get(i).getCodigo() == 1075 ){
+                    msj += ServiciosPlanTotal.get(i).getCantidad();
+               }
+            }         
+            
+   
+            //Buscamos los Servicios adicionales del Prodcuto
+           List<String> PaquetesAdicionales;
+           PaquetesAdicionales =
+                       Consulta.BuscarPaquetesAdicionales(Producto.getCodigo());
+           ArrayList<String> ServiciosAdicionales= new ArrayList<String>();
+           ArrayList<Servicio> ServiciosAdicionalesTotal =
+                                                 new ArrayList<Servicio>(); 
+
+           for (int i = 0; i < PaquetesAdicionales.size(); i++) {
+
+               ServiciosAdicionales = Consulta4.obtenerServicios(
+                                  Integer.parseInt(PaquetesAdicionales.get(i)));
+
+               for (int j = 0; j < ServiciosAdicionales.size(); j++) {
+
+                 ServiciosAdicionalesTotal.add(Consulta4.buscarServicioPaquete(
+                            Integer.parseInt(ServiciosPlan.get(j)), 
+                            Integer.parseInt(Paquetes.get(i))));
+
+               }
+            }            
+                     
+            for (int i = 0; i < ServiciosAdicionalesTotal.size(); i++) {
+
+               if (ServiciosAdicionalesTotal.get(i).getCodigo() == 1014 ){
+                    segMOCEL += ServiciosAdicionalesTotal.get(i).getCantidad();
+               } else if (ServiciosAdicionalesTotal.get(i).getCodigo() == 1054){
+                    segOtras += ServiciosAdicionalesTotal.get(i).getCantidad();
+               } else if (ServiciosAdicionalesTotal.get(i).getCodigo() == 1075){
+                    msj += ServiciosAdicionalesTotal.get(i).getCantidad();
+               }
+            }    
+            
+            System.out.println(segMOCEL);   
+                System.out.println(segOtras);   
+                            System.out.println(msj);   
+            //Variables 
+            //int SegMOCEL 
+            
+            for (int i= 0 ; i < Consumos.size(); i++) {
+    
+               
+            }
+            
+        }
+        
+        
+        agregar= null;
+
         
          
         try{
@@ -175,4 +295,21 @@ public class ControladorConsumos{
         }
           
     }
+    
+    public void recargarSaldo(int CodigoProducto, int Recarga) {
+        
+        ControladorConsumidores Consulta = new ControladorConsumidores();
+        Producto Producto = Consulta.buscarProducto(CodigoProducto);
+                
+        ControladorFacturas Factura = new ControladorFacturas();
+        Factura.ImprimirFactura(CodigoProducto);
+        
+        Producto.setSaldo(Producto.getSaldo()+Recarga);
+                
+        
+    }
+    
+    
+    
+
 }

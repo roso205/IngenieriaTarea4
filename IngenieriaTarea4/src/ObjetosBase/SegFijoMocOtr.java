@@ -11,20 +11,6 @@ import  Interface.Contratable;
  */
 public class SegFijoMocOtr {
     
-    public  SegFijoMocOtr (Contratable cont){
-    
-        super(cont);
-    }    
-        
-    public String getNombre(){
-    
-        return getCont().getNombre() +"SegFijoMocOtr";
-    }
-    
-    public double getTarifa(){
-    
-        return getCont().getTarifa() + 1500;
-    }
     
     
 }

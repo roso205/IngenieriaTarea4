@@ -32,11 +32,6 @@ public class gestionarBaseDatos {
             Connection connection = DriverManager.getConnection(connectString, user, password);
             Statement stmt = connection.createStatement();
             
-
-            if (connection != null) {
-                System.out.println("...Conectando a la base de datos...");
-            }
-
             ResultSet rs = stmt.executeQuery(consulta);
 
             stmt.close();
@@ -65,10 +60,6 @@ public class gestionarBaseDatos {
             Connection connection = DriverManager.getConnection(connectString, user, password);
             Statement stmt = connection.createStatement();
 
-            if (connection != null) {
-                System.out.println("...Conectando a la base de datos...");
-            }
-
             int resultado = stmt.executeUpdate(insert);
 
             stmt.close();
@@ -96,9 +87,6 @@ public class gestionarBaseDatos {
             Class.forName(driver);
             Connection connection = DriverManager.getConnection(connectString, user, password);
 
-            if (connection != null) {
-                System.out.println("...Conectando a la base de datos...");
-            }
             return connection;          
         }
 

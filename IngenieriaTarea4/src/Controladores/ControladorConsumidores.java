@@ -11,9 +11,7 @@ import ObjetosBase.Producto;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.*;
 /**
  *
  * @author arturo
@@ -91,16 +89,20 @@ public class ControladorConsumidores {
 
                     
         ResultSet rs = stmt.executeQuery(consulta);
-
+        Date Fecha = new Date();
         List<String> resultado = new ArrayList<String>();
 
 
         while (rs.next()){
 
-            for (int i = 1; i < 8; i++) {
+            for (int i = 1; i < 8 ; i++) {
 
-                resultado.add(rs.getString(i));
+                if (i != 6){
+                    resultado.add(rs.getString(i));
+                } else {
 
+                   Fecha = rs.getDate(i);               
+                }
             }
         }
 
@@ -109,8 +111,10 @@ public class ControladorConsumidores {
                                 resultado.get(1),resultado.get(2),
                                 Integer.parseInt(resultado.get(3)),
                                 Integer.parseInt(resultado.get(4)), 
-                                resultado.get(5),
-                                Integer.parseInt(resultado.get(6)));
+                                Fecha,
+                                Integer.parseInt(resultado.get(5)));
+        
+    
         stmt.close();
         BaseDatos.cerrarConexion(connection); 
         return Producto;
