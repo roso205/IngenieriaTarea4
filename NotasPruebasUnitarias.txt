@@ -1,0 +1,18 @@
+De las pruebas unitarias correspondientes a la tarea 3 y 4, por razones
+de tiempo, solo se incluye un inicio en el módulo ControladorServiciosOfrecidos.
+
+Para cada módulo, lo ideal sería probar cada método con al menos dos pruebas.
+Es decir, una en un caso normal (caso que se sabe que funcionará) y una con
+un caso borde (caso en que sea posible que falle), si el tiempo alcanza, una
+tercera prueba (caso en el que falle) complementaría bastante bien al resto.
+
+Por ejemplo, para la clase ControladorConsumidores, el método agregarCliente,
+se puede probar con tres casos:
+
+    - Agregar un cliente que no exista.
+    - Agregar un cliente ya existente.
+    - Agregar un cliente "null".
+
+
+Todas las clases con atributos, en el diagrama de clases, tienen sus
+getter y setter, no se muestran por simplificación.
