@@ -392,6 +392,54 @@ public class ControladorServiciosOfrecidos {
   
     }
     
+    
+    
+    public Servicio buscarServicio(  int CodigoServicio) {
+
+        try{
+
+        gestionarBaseDatos BaseDatos = new gestionarBaseDatos();
+        
+        Connection connection = BaseDatos.establecerConexion();
+                
+        Statement stmt = connection.createStatement();
+        String consulta = "SELECT * FROM SERVICIO "
+                         + " WHERE (SERVICIO.CODIGO = " 
+                         +Integer.toString(CodigoServicio)+") ";
+
+                   
+        ResultSet rs = stmt.executeQuery(consulta);
+        List<String> resultado = new ArrayList<String>();
+
+
+        while (rs.next()){
+
+            for (int i = 1; i < 5 ; i++) {
+
+
+                resultado.add(rs.getString(i));
+            }
+        }
+        
+ 
+        Servicio Servicio = new Servicio(Integer.parseInt(resultado.get(0)),
+                          resultado.get(1), Integer.parseInt(resultado.get(2)),
+                            Integer.parseInt(resultado.get(3)), 0 );
+
+        stmt.close();
+        BaseDatos.cerrarConexion(connection); 
+        return Servicio;
+        }
+
+        catch ( Exception e ) {
+            System.out.println(e.getMessage());
+            Servicio Servicio = null;
+            return Servicio;
+        } 
+
+  
+    }
+    
     public ArrayList<String> obtenerServicios(int codigoPaquete) {
         
         gestionarBaseDatos gestorBD = new gestionarBaseDatos();

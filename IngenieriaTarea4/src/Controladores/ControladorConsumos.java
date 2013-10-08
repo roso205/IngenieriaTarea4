@@ -107,13 +107,10 @@ public class ControladorConsumos{
                  ServiciosPlanTotal.add(Consulta4.buscarServicioPaquete(
                             Integer.parseInt(ServiciosPlan.get(j)), 
                             Integer.parseInt(Paquetes.get(i))));
-                 
-
 
                 }
             }
             
-   
             int segMOCEL = 0;
             int segOtras = 0;
             int msj = 0;
@@ -130,8 +127,7 @@ public class ControladorConsumos{
                     msj += ServiciosPlanTotal.get(i).getCantidad();
                }
             }         
-            
-   
+
             //Buscamos los Servicios adicionales del Prodcuto
            List<String> PaquetesAdicionales;
            PaquetesAdicionales =
@@ -139,21 +135,22 @@ public class ControladorConsumos{
            ArrayList<String> ServiciosAdicionales= new ArrayList<String>();
            ArrayList<Servicio> ServiciosAdicionalesTotal =
                                                  new ArrayList<Servicio>(); 
-
+ 
            for (int i = 0; i < PaquetesAdicionales.size(); i++) {
 
                ServiciosAdicionales = Consulta4.obtenerServicios(
                                   Integer.parseInt(PaquetesAdicionales.get(i)));
 
                for (int j = 0; j < ServiciosAdicionales.size(); j++) {
-
+  
                  ServiciosAdicionalesTotal.add(Consulta4.buscarServicioPaquete(
                             Integer.parseInt(ServiciosPlan.get(j)), 
-                            Integer.parseInt(Paquetes.get(i))));
+                            Integer.parseInt(PaquetesAdicionales.get(i))));
 
                }
             }            
-                     
+                  
+          
             for (int i = 0; i < ServiciosAdicionalesTotal.size(); i++) {
 
                if (ServiciosAdicionalesTotal.get(i).getCodigo() == 1014 ){
@@ -164,22 +161,89 @@ public class ControladorConsumos{
                     msj += ServiciosAdicionalesTotal.get(i).getCantidad();
                }
             }    
-            
-            System.out.println(segMOCEL);   
-                System.out.println(segOtras);   
-                            System.out.println(msj);   
-            //Variables 
-            //int SegMOCEL 
-            
+             
+            //Revisamos todo los consumos que el producto a tenido desde su 
+            //ultima afiliacion de plan y restamos los consumos a lo que
+            //ofrece el plan
             for (int i= 0 ; i < Consumos.size(); i++) {
-    
-               
+
+                if (Consumos.get(i).getFecha().before(fecha) &&
+                     Consumos.get(i).getFecha().
+                                         after(Producto.getFechaAfiliacion())) {  
+                                                                
+                    if (Consumos.get(i).getcodServicio() == 1014 ){
+                         segMOCEL -= Consumos.get(i).getCantidad();
+                    } else if (Consumos.get(i).getcodServicio() == 1054){
+                         segOtras -= Consumos.get(i).getCantidad();
+                    } else if (Consumos.get(i).getcodServicio() == 1075){
+                         msj -= Consumos.get(i).getCantidad();
+                    }
+                }
             }
             
+                        
+            //Restamos el consumo 
+           if (codServicio == 1014 ){
+                segMOCEL -= cantidad;
+           } else if (codServicio == 1054){
+                segOtras -= cantidad;
+           } else if (codServicio == 1075){
+                msj -= cantidad;
+           }                    
+
+           
+           boolean ver = true;
+           
+           
+           //Verificamos si el saldo es suficiente para hacer el consumo
+           if (segMOCEL < 0) {
+               
+               Servicio Servicio = Consulta4.buscarServicio(1014);
+               
+               if ( Servicio.getCosto() * cantidad > Producto.getSaldo() ) {
+               
+                    System.out.println("No se puede realizar el consumo,"
+                                                        + "saldo insuficiente");
+                    ver = false;
+   
+               }
+           } else if (segOtras < 0) {
+               
+               Servicio Servicio = Consulta4.buscarServicio(1054);
+               
+               if ( Servicio.getCosto() * cantidad > Producto.getSaldo() ) {
+               
+                    System.out.println("No se puede realizar el consumo,"
+                                                        + "saldo insuficiente");
+                    ver = false;
+
+               } 
+           } else if (msj < 0) {
+               
+               Servicio Servicio = Consulta4.buscarServicio(1075);
+               
+               if ( Servicio.getCosto() * cantidad > Producto.getSaldo() ) {
+               
+                    System.out.println("No se puede realizar el consumo,"
+                                                        + "saldo insuficiente");
+                    ver = false;
+
+               }
+           } 
+           
+           
+           if (ver) {
+                agregar = "INSERT INTO CONSUMO "
+                        + "(CODIGO_S,CODIGO_PR,FECHA,CANTIDAD)"
+                         + "VALUES ("+Integer.toString(codServicio)+","
+                         +Integer.toString(codProducto)+","+fecha+","
+                                                               +cantidad+")";
+           } else
+               agregar = null;
         }
         
         
-        agregar= null;
+
 
         
          
