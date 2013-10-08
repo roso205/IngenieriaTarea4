@@ -11,14 +11,16 @@ public class Servicio {
     private String Nombre;
     private int Costo;
     private int CodigoTipo;
-   
+    private int Cantidad;
     //Constructor
-    public Servicio(int Codigo, String Nombre, int Costo, int CodigoTipo){
+    public Servicio(int Codigo, String Nombre, int Costo, int CodigoTipo,
+                                                                  int Cantidad){
         
         this.Codigo = Codigo;
         this.Nombre = Nombre;
         this.Costo = Costo;
         this.CodigoTipo = CodigoTipo;
+        this.Cantidad = Cantidad;
         
     }
           
@@ -72,5 +74,15 @@ public class Servicio {
               
     }    
     
-     
+     public void setCantidad(int Cantidad) {
+        
+        this.Cantidad = Cantidad;
+                   
+    }
+
+    public int getCantidad() {
+       
+        return this.Cantidad;
+              
+    }     
 }

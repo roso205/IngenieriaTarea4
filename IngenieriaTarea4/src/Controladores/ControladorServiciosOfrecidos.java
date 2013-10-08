@@ -6,12 +6,12 @@ package Controladores;
 
 import BaseDatos.Conexion;
 import BaseDatos.gestionarBaseDatos;
-import ObjetosBase.Paquete;
-import ObjetosBase.Plan;
+import ObjetosBase.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -191,7 +191,7 @@ public class ControladorServiciosOfrecidos {
         Connection cn = new Conexion().getConexion();
         
         Statement stm = cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-   ResultSet.CONCUR_READ_ONLY); 
+        ResultSet.CONCUR_READ_ONLY); 
         
         ResultSet rs = stm.executeQuery("SELECT * FROM PRODUCTO WHERE"
                 + "CODIGO_P="+cop);
@@ -365,6 +365,66 @@ public class ControladorServiciosOfrecidos {
         gestorBD.cerrarConexion(conexion);
         
         return false;
+    }
+    
+    public Servicio buscarServicioPaquete(
+                                   int CodigoServicio, int CodigoPaquete) {
+
+        try{
+
+        gestionarBaseDatos BaseDatos = new gestionarBaseDatos();
+        
+        Connection connection = BaseDatos.establecerConexion();
+                
+        Statement stmt = connection.createStatement();
+        String consulta = "SELECT * FROM SERVICIO "
+                         + " WHERE (SERVICIO.CODIGO = " 
+                         +Integer.toString(CodigoServicio)+") ";
+
+                   
+        ResultSet rs = stmt.executeQuery(consulta);
+        List<String> resultado = new ArrayList<String>();
+
+
+        while (rs.next()){
+
+            for (int i = 1; i < 5 ; i++) {
+
+
+                resultado.add(rs.getString(i));
+            }
+        }
+        
+
+         consulta = "SELECT CANTIDAD FROM CONFORMA "
+                          + " WHERE (CONFORMA.CODIGO_PQ = " 
+                                     +Integer.toString(CodigoPaquete)
+                          +") AND (CONFORMA.CODIGO_S ="
+                                    +Integer.toString(CodigoServicio)+") ";  
+
+         rs = stmt.executeQuery(consulta);
+         int Cantidad = 0; 
+         
+         while (rs.next()){
+             Cantidad = rs.getInt(1);
+         }     
+         
+        Servicio Servicio = new Servicio(Integer.parseInt(resultado.get(0)),
+                          resultado.get(1), Integer.parseInt(resultado.get(2)),
+                            Integer.parseInt(resultado.get(3)), Cantidad );
+
+        stmt.close();
+        BaseDatos.cerrarConexion(connection); 
+        return Servicio;
+        }
+
+        catch ( Exception e ) {
+            System.out.println(e.getMessage());
+            Servicio Servicio = null;
+            return Servicio;
+        } 
+
+  
     }
     
     public ArrayList<String> obtenerServicios(int codigoPaquete) {
